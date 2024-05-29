@@ -1,5 +1,6 @@
 package com.alura.literalura.principal;
 
+import com.alura.literalura.repository.ILibroRepositorio;
 import com.alura.literalura.service.ConsumoAPI;
 import com.alura.literalura.service.ConvierteDatos;
 
@@ -9,10 +10,12 @@ public class Principal {
     private Scanner sc = new Scanner(System.in);
     private ConsumoAPI consumoAPI = new ConsumoAPI();
     private ConvierteDatos conversor = new ConvierteDatos();
+    private ILibroRepositorio repositorio;
+    private final String URL_BASE = "https://gutendex.com/books/";
 
     public void mostrarMenu() {
-        var option = - 1;
-        while (option != 0) {
+        var opcion = - 1;
+        while (opcion != 0) {
             var menu = """
                 ----------------------------------------------------
                 Bienvenido/a a LiterAlura.
@@ -26,8 +29,14 @@ public class Principal {
                 ----------------------------------------------------
                 """;
             System.out.println(menu);
-            option = sc.nextInt();
+            opcion = sc.nextInt();
             sc.nextLine();
+
+//            switch (opcion) {
+//                case 1:
+//                    getLibroData;
+//                    break;
+//            }
         }
     }
 }

@@ -1,11 +1,17 @@
 package com.alura.literalura.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "autores")
 public class InformacionDeAutor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private Integer nacimiento;
     private Integer fallecimiento;
-
+    @ManyToOne
     private Libro libro;
     public InformacionDeAutor(){}
     public InformacionDeAutor(String nombre, Integer nacimiento, Integer fallecimiento, Libro libro) {
@@ -53,5 +59,13 @@ public class InformacionDeAutor {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString(){
+        return
+                "name='" + nombre + '\'' +
+                        ", birthYear=" + nacimiento +
+                        ", deathYear=" + fallecimiento;
     }
 }
