@@ -80,9 +80,9 @@ public class Libro {
     @Override
     public String toString() {
         return
-                "Title='" + titulo + '\'' + "\n" +
-                        "Authors=" + autores + "\n" +
-                        "Languages=" + idiomas + "\n" +
-                        "Downloads=" + descargas + "\n";
+                "Título: " + titulo + "\n" +
+                        "Autores: " + autores + "\n" +
+                        "Idiomas: " + idiomas + "\n" +
+                        "Descargas: " + descargas + "\n";
     }
 }

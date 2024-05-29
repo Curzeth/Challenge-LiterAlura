@@ -1,6 +1,8 @@
 package com.alura.literalura.principal;
 
 import com.alura.literalura.model.Datos;
+import com.alura.literalura.model.Idiomas;
+import com.alura.literalura.model.InformacionDeAutor;
 import com.alura.literalura.model.Libro;
 import com.alura.literalura.repository.ILibroRepositorio;
 import com.alura.literalura.service.ConsumoAPI;
@@ -57,7 +59,16 @@ public class Principal {
                     listarAutoresVivos();
                     break;
                 case 5:
-                    listarLibrosPorIdioma();
+                    buscarPorIdiomas();
+                    break;
+                case 0:
+                    System.out.println("""
+                            Gracias por su preferencia ♥
+                            Saliendo de la aplicación...
+                            """);
+                    break;
+                default:
+                    System.out.println("Opción no válida");
                     break;
             }
         }
@@ -102,6 +113,48 @@ public class Principal {
 
             libros.stream()
                     .sorted(Comparator.comparing(Libro::getTitulo))
+                    .forEach(System.out::println);
+        }
+
+        private void listarAutoresRegistrados() {
+            List<InformacionDeAutor> autores = repositorio.getInformacionDeAutor();
+
+            autores.stream()
+                    .sorted(Comparator.comparing(InformacionDeAutor::getNombre))
+                    .forEach(a -> System.out.printf("Autor: %s\nNacimiento: %s, Fallecimiento: %s\n",
+                            a.getNombre(), a.getNacimiento(), a.getFallecimiento()));
+        }
+
+        public void listarAutoresVivos() {
+            System.out.println("Escribe el año para ver qué autores estaban vivos en esa fecha (Ejemplo, 1800):");
+            int fecha = sc.nextInt();
+            sc.nextLine();
+
+            List<InformacionDeAutor> informacionDeAutores = repositorio.getAutoresVivos(fecha);
+
+            informacionDeAutores.stream()
+                    .sorted(Comparator.comparing(InformacionDeAutor::getNombre))
+                    .forEach(a -> System.out.printf("Autor: %s\nNacimiento: %s, Fallecimiento: %s\n",
+                            a.getNombre(), a.getNacimiento(), a.getFallecimiento()));
+        }
+
+        public void buscarPorIdiomas(){
+            String listaDeIdiomas = """
+                    Idiomas disponibles para buscar:
+                    es - Español
+                    en - Inglés
+                    it - Italiano
+                    fr - Francés
+                    pr - Portugés
+                    """;
+            System.out.println(listaDeIdiomas);
+            String texto = sc.nextLine();
+
+            var idioma = Idiomas.fromString(texto);
+
+            List<Libro> idiomaDelLibro = repositorio.findByIdiomas(idioma);
+
+            idiomaDelLibro.stream()
                     .forEach(System.out::println);
         }
 }

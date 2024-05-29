@@ -9,11 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ILibroRepositorio extends JpaRepository<Libro, Long> {
-    @Query("SELECT a FROM Book b JOIN b.authors a")
+    @Query("SELECT a FROM Libro b JOIN b.autores a")
     List<InformacionDeAutor> getInformacionDeAutor();
 
-    @Query("SELECT a FROM Book b JOIN b.authors a WHERE birthYear > :date")
-    List<InformacionDeAutor> getAuthorLiveAfter (Integer date);
+    @Query("SELECT a FROM Libro b JOIN b.autores a WHERE a.nacimiento <= :fecha AND (a.fallecimiento >= :fecha OR a.fallecimiento IS NULL)")
+    List<InformacionDeAutor> getAutoresVivos (Integer fecha);
 
-    List<Libro> encontrarPorIdioma (Idiomas idiomas);
+    List<Libro> findByIdiomas(Idiomas idiomas);
 }
