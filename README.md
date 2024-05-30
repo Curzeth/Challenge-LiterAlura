@@ -17,4 +17,4 @@ Catálogo de libros en el cual la persona usuaria puede registrar libros en una 
 - Listar libros por idioma
 
 *#Challenge LiterAlura,
-AluraLatam*
+#AluraLatam*
