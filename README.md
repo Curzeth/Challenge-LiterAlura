@@ -16,5 +16,5 @@ Catálogo de libros en el cual la persona usuaria puede registrar libros en una 
 - Listar autores vivos en determinado año
 - Listar libros por idioma
 
-*Challenge LiterAlura
+*#Challenge LiterAlura,
 AluraLatam*
