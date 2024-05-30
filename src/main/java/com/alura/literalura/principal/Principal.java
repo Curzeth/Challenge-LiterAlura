@@ -33,7 +33,7 @@ public class Principal {
                 ----------------------------------------------------
                 Bienvenido/a a LiterAlura.
                 ----------------------------------------------------
-                1) Buscar libro por titulo
+                1) Buscar libro por título
                 2) Listar libros registrados
                 3) Listar autores registrados
                 4) Listar autores vivos por año
@@ -68,14 +68,14 @@ public class Principal {
                             """);
                     break;
                 default:
-                    System.out.println("Opción no válida");
+                    System.out.println("Opción no válida.");
                     break;
             }
         }
     }
 
         private String obtenerDatosDeUsuario() {
-            System.out.println("Escriba el titulo del libro que desea buscar");
+            System.out.println("Escriba el título del libro que desea buscar:");
             libroSeleccionado = sc.nextLine();
             return libroSeleccionado;
         }
@@ -94,7 +94,15 @@ public class Principal {
             return libros;
         }
 
-        private Optional<Libro> obtenerDatosLibro() {
+    private void mostrarInformacionLibro(Libro libro) {
+        System.out.println("Libro Encontrado:");
+        System.out.println("Título: " + libro.getTitulo());
+        System.out.println("Autor: " + libro.getAutores());
+        System.out.println("Idioma: " + libro.getIdiomas());
+        System.out.println("Descargas: " + libro.getDescargas());
+    }
+
+    private Optional<Libro> obtenerDatosLibro() {
             String libroTitulo = obtenerDatosDeUsuario();
             Datos informacionLibro = obtenerDatosLibroDeAPI(libroTitulo);
             Optional<Libro> libro = obtenerInformacionLibro(informacionLibro, libroTitulo);
@@ -102,8 +110,9 @@ public class Principal {
             if (libro.isPresent()) {
                 var b = libro.get();
                 repositorio.save(b);
+                mostrarInformacionLibro(b);
             } else {
-                System.out.println("Libro no encontrado");
+                System.out.println("Libro no encontrado.");
             }
             return libro;
         }
@@ -140,12 +149,15 @@ public class Principal {
 
         public void buscarPorIdiomas(){
             String listaDeIdiomas = """
+                    ----------------------------------------------------
                     Idiomas disponibles para buscar:
+                    ----------------------------------------------------
                     es - Español
                     en - Inglés
                     it - Italiano
                     fr - Francés
                     pr - Portugés
+                    ----------------------------------------------------
                     """;
             System.out.println(listaDeIdiomas);
             String texto = sc.nextLine();
